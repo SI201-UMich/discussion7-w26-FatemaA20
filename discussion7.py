@@ -62,7 +62,7 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
     counts = {}
 
     for listing in listings:
-        key = (listing['neighborhood_group'], listing['room_type'])
+        key = (listing['neighbourhood_group'], listing['room_type'])
         price = float(listing['price'])
 
         totals[key] = totals.get(key, 0) + price 
@@ -91,15 +91,15 @@ def write_summary_csv(out_filename, avg_prices):
         None
             Writes a CSV file with header: neighbourhood_group, room_type, average_price
     """
-    with open(full_path, newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['neighborhood_group', 'room_type', 'average_price']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldname)
+    with open(out_filename, 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['neighbourhood_group', 'room_type', 'average_price']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         writer.writeheader()
 
-        for (neighborhood_group, room_type), avg_price in avg_prices.items():
+        for (neighbourhood_group, room_type), avg_price in avg_prices.items():
             writer.writerow({
-                'neighborhood_group': neighborhood_group,
+                'neighbourhood_group': neighbourhood_group,
                 'room_type': room_type,
                 'average_price': avg_price
             })
