@@ -91,7 +91,18 @@ def write_summary_csv(out_filename, avg_prices):
         None
             Writes a CSV file with header: neighbourhood_group, room_type, average_price
     """
-    pass
+    with open(full_path, newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['neighborhood_group', 'room_type', 'average_price']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldname)
+
+        writer.writeheader()
+
+        for (neighborhood_group, room_type), avg_price in avg_prices.items():
+            writer.writerow({
+                'neighborhood_group': neighborhood_group,
+                'room_type': room_type,
+                'average_price': avg_price
+            })
 
 ###############################################################################
 ##### UNIT TESTS (Do not modify the code below!)
